@@ -1,0 +1,19 @@
+name: Basic CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Give execute permission
+        run: chmod +x script.sh
+
+      - name: Run Script
+        run: ./script.sh
