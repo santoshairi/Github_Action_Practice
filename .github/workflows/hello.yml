@@ -15,6 +15,9 @@ jobs:
     - name: Print Date and Time
       run: date 
 
+    - name: Fail the pipeline
+      run: exit 1  
+
     - name: Print Branch name
       run: echo "Branch name is ${{ github.ref_name }}" 
 
