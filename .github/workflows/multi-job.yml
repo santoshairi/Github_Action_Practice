@@ -1,4 +1,4 @@
-name:
+name: Multi-job workflow
 
 on:
   branches: [main]
@@ -24,6 +24,6 @@ jobs:
         - name: Deploy
           run: echo "code deploying" 
 
-          
+
 
               
