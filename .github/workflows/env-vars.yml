@@ -21,8 +21,8 @@ jobs:
           echo "workflow level env: $APP_NAME"
           echo "job level env: $ENVIRONMENT"
           echo "steps level env: $VERSION"
-          echo "commit SHA: "${{ github.sha }}"
-          echo Actor: "{{ gitbub.actor }}"
+          echo commit SHA: "${{ github.sha }}"
+          echo Actor: "${{ gitbub.actor }}"
 
 
 
