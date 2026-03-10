@@ -1,8 +1,7 @@
 name: environments variables 
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 env:
   AAP_NAME: myapp
