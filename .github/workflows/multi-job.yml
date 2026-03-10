@@ -1,7 +1,8 @@
 name: Multi-job workflow
 
 on:
-  branches: [main]
+  push:
+    branches: [main]
 
 jobs:
   Build:
