@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      today: ${{ steps.date-setp.output.today }} 
-  steps:
-    - name: get today's date
-      id: date-step
-      run: ehcho " today=$(date + '%y-%m-%d')" >> $GITHUB_OUTPUT
+      today: ${{ steps.date-step.outputs.today }} 
+    steps:
+      - name: get today's date
+        id: date-step
+        run: ehcho " today=$(date + '%y-%m-%d')" >> $GITHUB_OUTPUT
 
   print-date:
     runs-on: ubuntu-latest
