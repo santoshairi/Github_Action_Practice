@@ -23,13 +23,16 @@ jobs:
     needs: [lint, test]
 
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
       - name: Print branch type
         run: |
-          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+          if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
             echo "This is a main branch push"
           else
             echo "This is a feature branch push"
           fi
 
       - name: Print commit message
-        run: echo "Commit message: ${{ github.event.head_commit.message }}"
+        run: git log -1 --pretty=%B
