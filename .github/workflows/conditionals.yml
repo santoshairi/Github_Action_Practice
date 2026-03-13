@@ -1,8 +1,8 @@
 name: Conditionals Demo
 
 on:
-  push:
-    brnaches: [main]
+  #push:
+    #brnaches: [main]
   pull_request:
 
 jobs:
