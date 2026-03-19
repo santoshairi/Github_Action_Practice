@@ -1,9 +1,17 @@
-- name: Artifact file
-  run: echo "test report - sucess" > report.txt
+name: 
+on:
+  workflow_dispatch:
 
-- name: Upload Artifact
-  uses: actions/upload-artifact@v4
-  with:
-    name: test-report
-    path: report.txt
-    
+jobs:
+  generate-reports:
+    runs-on: ubuntu-latest
+    steps:
+      - name: report generate
+        run: |
+          mkdir reports
+          echo "test run successful" > reports/test-report.txt
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: reports/test-report.txt
