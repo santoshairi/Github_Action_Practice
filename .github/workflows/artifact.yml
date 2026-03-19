@@ -1,0 +1,9 @@
+- name: Artifact file
+  run: echo "test report - sucess" > report.txt
+
+- name: Upload Artifact
+  uses: actions/upload-artifact@v4
+  with:
+    name: test-report
+    path: report.txt
+    
