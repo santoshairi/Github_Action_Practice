@@ -1,11 +1,8 @@
 name: Docker Build and Push
 
 on:
-  push:
-    branches:
-      - main
-      - feature/*   # allow build test on feature branch
-
+  workflow_dispatch:
+     
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -20,8 +17,8 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/github-actions-practice:latest .
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/github-actions-practice:sha-${{ env.SHA_SHORT }} .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/test-app:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/test-app:sha-${{ env.SHA_SHORT }} .
 
       - name: Login to Docker Hub
         if: github.ref == 'refs/heads/main'
@@ -31,5 +28,5 @@ jobs:
       - name: Push Docker Image
         if: github.ref == 'refs/heads/main'
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/github-actions-practice:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/github-actions-practice:sha-${{ env.SHA_SHORT }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/test-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/test-app:sha-${{ env.SHA_SHORT }}
