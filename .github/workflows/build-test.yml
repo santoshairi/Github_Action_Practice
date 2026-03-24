@@ -16,19 +16,19 @@ jobs:
 
       - name: Login to Docker Hub
         run: |
-          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USER }}" --password-stdin
 
       - name: Build Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/test-app2:latest .
-          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/test-app2:latest ${{ secrets.DOCKERHUB_USERNAME }}/test-app:sha-${{ env.SHA_SHORT }}
+          docker build -t ${{ secrets.DOCKERHUB_USER }}/test-app2:latest .
+          docker tag ${{ secrets.DOCKERHUB_USER }}/test-app2:latest ${{ secrets.DOCKERHUB_USER }}/test-app:sha-${{ env.SHA_SHORT }}
 
       - name: Push Docker Image
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/test-app2:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/test-app2:sha-${{ env.SHA_SHORT }} 
+          docker push ${{ secrets.DOCKERHUB_USER }}/test-app2:latest
+          docker push ${{ secrets.DOCKERHUB_USER }}/test-app2:sha-${{ env.SHA_SHORT }} 
 
-      - name: list docker images
+      - name: list docker images 
         run:  
           docker images
       - name:
