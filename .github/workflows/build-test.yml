@@ -1,20 +1,35 @@
-name: Docker Build Test
+name: Docker Build & Push (Manual)
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  docker:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Set Short SHA
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Login to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
       - name: Build Docker Image
         run: |
-          docker build -t test-app:latest .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/test-app2:latest .
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/test-app2:latest ${{ secrets.DOCKERHUB_USERNAME }}/test-app:sha-${{ env.SHA_SHORT }}
 
-      - name: output command
+      - name: Push Docker Image
         run: |
-          docker images    
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/test-app2:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/test-app2:sha-${{ env.SHA_SHORT }} 
+
+      - name: list docker images
+        run:  
+          docker images
+      - name:
+        run: echo "build and push successful"    
